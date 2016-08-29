@@ -871,11 +871,11 @@ void VSPAEROScreen::GuiDeviceCallBack( GuiDevice* device )
 
 // VSPAEROScreen::AddOutputText( Fl_Text_Display *display, const char *text )
 //     This is used for the Solver tab to show the current results of the solver in the GUI
-void VSPAEROScreen::AddOutputText( Fl_Text_Display *display, const char *text )
+void VSPAEROScreen::AddOutputText( Fl_Text_Display *display, const string &text )
 {
     if ( display )
     {
-        display->buffer()->append( text );
+        display->buffer()->append( text.c_str() );
         while( display->move_down() ) {}
 
         display->show_insert_position();
