@@ -875,10 +875,15 @@ void VSPAEROScreen::AddOutputText( Fl_Text_Display *display, const string &text 
 {
     if ( display )
     {
+        // Added lock(), unlock() calls to avoid heap corruption while updating the text and rapidly scrolling with the mouse wheel inside the text display
+        Fl::lock();
+
         display->buffer()->append( text.c_str() );
-        while( display->move_down() ) {}
+        display->insert_position(display->buffer()->length());
 
         display->show_insert_position();
+
+        Fl::unlock();
     }
 }
 
